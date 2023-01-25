@@ -24,9 +24,6 @@ class App {
   }
 
   protected routes(): void {
-    // this.app.route("/").get((req: Request, res: Response) => {
-    //   res.send("This server running with Typescripts");
-    // });
     this.app.use("/auth", AuthRoutes);
   }
 }
@@ -34,5 +31,4 @@ const PORT: number = 8050;
 const app = new App().app;
 app.listen(PORT, () => {
   console.log(`This server running on port ${PORT}`);
-  console.log(Number(process.env.DB_PORT_DEV));
 });
