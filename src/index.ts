@@ -1,11 +1,13 @@
+require("express-async-errors");
 import express, { Application, Request, Response } from "express";
 import morgan from "morgan";
 import compression from "compression";
 import cors from "cors";
 import helmet from "helmet";
-import AuthRoutes from "./routes/authRoutes";
+import authRoutes from "./routes/authRoutes";
+import userRoutes from "./routes/userRoutes";
+import transactionRoutes from "./routes/transactionRoutes";
 require("dotenv").config();
-
 class App {
   public app: Application;
 
@@ -24,7 +26,9 @@ class App {
   }
 
   protected routes(): void {
-    this.app.use("/auth", AuthRoutes);
+    this.app.use("/auth", authRoutes);
+    this.app.use("/user", userRoutes);
+    this.app.use("/transaction", transactionRoutes);
   }
 }
 const PORT: number = 8050;

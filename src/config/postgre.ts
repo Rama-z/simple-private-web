@@ -9,4 +9,4 @@ const db = new Pool({
   port: Number(process.env.DB_PORT_DEV),
 });
 
-module.exports = db;
+export default db;
