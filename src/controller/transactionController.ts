@@ -2,12 +2,16 @@ import { Request, Response } from "express";
 import transactionRepo from "../repo/transactionRepo";
 
 class TransactionController {
-  getHistory = async (req: Request, res: Response): Promise<Response> => {
+  getHistory = async (req: Request, res: Response): Promise<any> => {
     try {
-      const result = await transactionRepo.getHistory();
-      return res.send("success");
+      const result = await transactionRepo.getHistory(
+        req.app.locals.decodedPayloads.id
+      );
+      return res.status(201).json({
+        result,
+      });
     } catch (err) {
-      throw err;
+      console.log(err);
     }
   };
   getTransaction = async (req: Request, res: Response): Promise<Response> => {

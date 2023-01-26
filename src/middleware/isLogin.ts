@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
 export const isLogin = (
   req: Request,
@@ -13,21 +13,23 @@ export const isLogin = (
     });
   }
   const token: string = req.headers.authorization.split(" ")[1];
+
   try {
     const credential: string | object = jwt.verify(
       token,
       process.env.JWT_SECRET_KEY || "",
       { issuer: process.env.JWT_ISSUER_KEY }
     );
-
-    if (credential) {
-      next();
+    if (credential.toString().length === 0) {
+      return res.status(401).json({
+        status: 401,
+        message: "token invalid",
+      });
     }
-    return res.status(401).json({
-      status: 401,
-      message: "token invalid",
-    });
+    req.app.locals.decodedPayloads = credential;
+    next();
   } catch (err) {
+    console.log(err);
     return res.send(err);
   }
 };

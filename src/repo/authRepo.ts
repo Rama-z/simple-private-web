@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import db from "../config/postgre";
+import db from "../config/postgres";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 class AuthRepository {
