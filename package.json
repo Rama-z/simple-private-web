@@ -8,7 +8,6 @@
     "ts": "rm -rf build/ && tsc -w",
     "dev": "npx nodemon",
     "build": "rimraf ./build && tsc",
-    // "start": "npm run build && node build/index.js"
     "start": "vercel dev",
     "deploy" : "vercel deploy --prod"
   },
