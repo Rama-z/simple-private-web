@@ -23,6 +23,7 @@ class App {
     this.app.use(helmet());
     this.app.use(cors());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.disable("etag");
   }
 
   protected routes(): void {
