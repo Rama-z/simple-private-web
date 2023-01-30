@@ -29,6 +29,11 @@ class App {
     this.app.use("/auth", authRoutes);
     this.app.use("/user", userRoutes);
     this.app.use("/transaction", transactionRoutes);
+    this.app.get("/", (req, res) => {
+      res.json({
+        message: "Capriconous personal web API",
+      });
+    });
   }
 }
 const PORT: number = 8050;
