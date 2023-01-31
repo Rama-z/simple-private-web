@@ -10,7 +10,7 @@ import transactionRoutes from "./routes/transactionRoutes";
 require("dotenv").config();
 class App {
   public app: Application;
-
+  public text: object = { msg: "Capriconous web API" };
   constructor() {
     this.app = express();
     this.plugins();
@@ -31,9 +31,7 @@ class App {
     this.app.use("/user", userRoutes);
     this.app.use("/transaction", transactionRoutes);
     this.app.get("/", (req, res) => {
-      res.json({
-        msg: "Capriconous personal web API",
-      });
+      res.send(this.text);
     });
   }
 }
