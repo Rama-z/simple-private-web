@@ -8,6 +8,8 @@ import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
 import transactionRoutes from "./routes/transactionRoutes";
 require("dotenv").config();
+const bodyParser = require("body-parser");
+const jsonParser = bodyParser.json();
 class App {
   public app: Application;
   public text: object = { msg: "Capriconous web API" };
@@ -23,6 +25,7 @@ class App {
     this.app.use(helmet());
     this.app.use(cors());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(jsonParser);
     this.app.disable("etag");
   }
 

@@ -55,6 +55,12 @@ class AuthRepository {
 
   login(body: any): Promise<any> {
     return new Promise((resolve, reject) => {
+      if (!body.email || !body.password) {
+        return reject({
+          status: 403,
+          message: "request body are undefined/ empty",
+        });
+      }
       db.query(this.queryCheckPassword, [body.email], (err, passwordResult) => {
         if (err) {
           return reject({
@@ -87,7 +93,7 @@ class AuthRepository {
           }
         );
         return resolve({
-          status: 201,
+          status: 202,
           message: "login success",
           payload,
           token,
