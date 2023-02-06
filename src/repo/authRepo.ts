@@ -84,11 +84,6 @@ class AuthRepository {
           password: passwordResult.rows[0].password,
           role: passwordResult.rows[0].roles,
         };
-        const payload2 = {
-          id: passwordResult.rows[0].id,
-          email: passwordResult.rows[0].email,
-          role: passwordResult.rows[0].roles,
-        };
         const token = jwt.sign(
           payload,
           process.env.JWT_SECRET_KEY || "secret",
@@ -100,7 +95,11 @@ class AuthRepository {
         return resolve({
           status: 202,
           message: "login success",
-          payload2,
+          payload: {
+            id: passwordResult.rows[0].id,
+            email: passwordResult.rows[0].email,
+            role: passwordResult.rows[0].roles,
+          },
           token,
         });
       });
