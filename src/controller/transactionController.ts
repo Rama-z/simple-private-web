@@ -12,7 +12,7 @@ class TransactionController {
       });
     } catch (err) {
       console.log(err);
-      return res.status(201).json({
+      return res.status(501).json({
         err,
       });
     }
