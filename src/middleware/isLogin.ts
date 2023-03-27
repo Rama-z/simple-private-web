@@ -13,7 +13,6 @@ export const isLogin = (
     });
   }
   const token: string = req.headers.authorization.split(" ")[1];
-
   try {
     const credential: string | object = jwt.verify(
       token,
@@ -30,6 +29,8 @@ export const isLogin = (
     next();
   } catch (err) {
     console.log(err);
-    return res.send(err);
+    return res
+      .status(401)
+      .json({ msg: "You have to login re-login first", data: null, err });
   }
 };
