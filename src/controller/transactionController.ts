@@ -12,6 +12,9 @@ class TransactionController {
       });
     } catch (err) {
       console.log(err);
+      return res.status(201).json({
+        err,
+      });
     }
   };
   getTransaction = async (req: Request, res: Response): Promise<Response> => {
