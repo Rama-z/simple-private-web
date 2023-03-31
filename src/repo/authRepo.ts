@@ -68,40 +68,42 @@ class AuthRepository {
             message: "get password error",
           });
         }
-        const checkedPassword: Promise<boolean> = bcrypt.compare(
+        bcrypt.compare(
           body.password,
-          passwordResult.rows[0].password
-        );
-        if (!checkedPassword) {
-          return reject({
-            status: 403,
-            message: "Wrong password",
-          });
-        }
-        const payload = {
-          id: passwordResult.rows[0].id,
-          email: passwordResult.rows[0].email,
-          password: passwordResult.rows[0].password,
-          role: passwordResult.rows[0].roles,
-        };
-        const token = jwt.sign(
-          payload,
-          process.env.JWT_SECRET_KEY || "secret",
-          {
-            expiresIn: "1d",
-            issuer: process.env.JWT_ISSUER_KEY,
+          passwordResult.rows[0].password,
+          (err, isSame) => {
+            if (!isSame) {
+              return reject({
+                status: 403,
+                message: "Wrong password",
+              });
+            }
+            const payload = {
+              id: passwordResult.rows[0].id,
+              email: passwordResult.rows[0].email,
+              password: passwordResult.rows[0].password,
+              role: passwordResult.rows[0].roles,
+            };
+            const token = jwt.sign(
+              payload,
+              process.env.JWT_SECRET_KEY || "secret",
+              {
+                expiresIn: "1d",
+                issuer: process.env.JWT_ISSUER_KEY,
+              }
+            );
+            return resolve({
+              status: 202,
+              message: "login success",
+              payload: {
+                id: passwordResult.rows[0].id,
+                email: passwordResult.rows[0].email,
+                role: passwordResult.rows[0].roles,
+              },
+              token,
+            });
           }
         );
-        return resolve({
-          status: 202,
-          message: "login success",
-          payload: {
-            id: passwordResult.rows[0].id,
-            email: passwordResult.rows[0].email,
-            role: passwordResult.rows[0].roles,
-          },
-          token,
-        });
       });
     });
   }
