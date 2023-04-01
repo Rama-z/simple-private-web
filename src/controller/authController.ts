@@ -14,7 +14,7 @@ class AuthController {
       console.log(err);
       return res.status(err.status).json({
         status: err.status,
-        error: err,
+        errors: err,
       });
     }
   };
@@ -30,7 +30,7 @@ class AuthController {
       console.log(err);
       return res.status(err.status).json({
         status: err.status,
-        error: err,
+        errors: err,
       });
     }
   };
