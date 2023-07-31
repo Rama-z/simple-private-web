@@ -5,7 +5,7 @@ class TransactionController {
   getHistory = async (req: Request, res: Response): Promise<any> => {
     try {
       const result = await transactionRepo.getHistory(
-        req.app.locals.decodedPayloads.id
+        req?.app?.locals?.decodedPayloads?.id
       );
       return res.status(201).json({
         result,
@@ -17,6 +17,7 @@ class TransactionController {
       });
     }
   };
+
   getTransaction = async (req: Request, res: Response): Promise<Response> => {
     try {
       const result = await transactionRepo.getTransaction();
@@ -25,6 +26,7 @@ class TransactionController {
       throw err;
     }
   };
+
   createTransaction = async (
     req: Request,
     res: Response

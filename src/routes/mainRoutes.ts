@@ -1,10 +1,7 @@
 import { Router } from "express";
+import { TRouter } from "../types";
 
-interface IRouter {
-  routes(): void;
-}
-
-abstract class MainRoutes implements IRouter {
+abstract class MainRoutes implements TRouter {
   public router: Router;
 
   constructor() {
