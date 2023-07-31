@@ -7,11 +7,11 @@ class AuthRepository {
   private queryRegister: string =
     "insert into users (email, password) values ($1, $2) returning email";
   private queryCheckPassword: string = "select * from users where email = $1";
+
   register(body: any): Promise<any> {
     return new Promise((resolve, reject) => {
       db.query(this.queryCheckEmail, [body.email], (err, result) => {
         if (err) {
-          console.log(err);
           return reject({
             status: 500,
             message: "internal server error",
@@ -35,7 +35,6 @@ class AuthRepository {
             [body.email, hashedPassword],
             (err, resultRegister) => {
               if (err) {
-                console.log(err);
                 return reject({
                   status: 401,
                   message: "register error",
