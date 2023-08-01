@@ -1,18 +1,23 @@
-require("express-async-errors");
-import express, { Application, Request, Response } from "express";
-import morgan from "morgan";
-import compression from "compression";
 import cors from "cors";
+import morgan from "morgan";
 import helmet from "helmet";
 import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
+import compression from "compression";
 import transactionRoutes from "./routes/transactionRoutes";
+import express, { Application } from "express";
+
+require("express-async-errors");
 require("dotenv").config();
+
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
+const PORT: number = 8050;
 class App {
   public app: Application;
   public text: object = { msg: "Capriconous web API" };
+  private prefix: string = "/first-business/v1";
+
   constructor() {
     this.app = express();
     this.plugins();
@@ -30,16 +35,17 @@ class App {
   }
 
   protected routes(): void {
-    this.app.use("/auth", authRoutes);
-    this.app.use("/user", userRoutes);
-    this.app.use("/transaction", transactionRoutes);
-    this.app.get("/", (req, res) => {
+    this.app.use(`${this.prefix}/auth`, authRoutes);
+    this.app.use(`${this.prefix}/user`, userRoutes);
+    this.app.use(`${this.prefix}/transaction`, transactionRoutes);
+    this.app.get(`${this.prefix}/`, (req, res) => {
       res.send(this.text);
     });
   }
 }
-const PORT: number = 8050;
+
 const app = new App().app;
+
 app.listen(PORT, () => {
   console.log(`This server running on port ${PORT}`);
 });

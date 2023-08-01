@@ -11,7 +11,6 @@ class AuthController {
         result: result.data,
       });
     } catch (err: any) {
-      console.log(err);
       return res.status(err.status).json({
         status: err.status,
         errors: err,
@@ -26,7 +25,6 @@ class AuthController {
         result,
       });
     } catch (err: any) {
-      console.log(err);
       return res.status(err.status).json({
         status: err.status,
         errors: err,

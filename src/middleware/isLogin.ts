@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+
 const jwt = require("jsonwebtoken");
 
 export const isLogin = (
@@ -28,7 +29,6 @@ export const isLogin = (
     req.app.locals.decodedPayloads = credential;
     next();
   } catch (err) {
-    console.log(err);
     return res
       .status(401)
       .json({ msg: "You have to login re-login first", data: null, err });

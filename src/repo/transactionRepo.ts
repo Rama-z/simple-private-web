@@ -10,7 +10,6 @@ class TransactionRepository {
     return new Promise((resolve, reject) => {
       db.query(this.queryGetHistory, [id], (err, result) => {
         if (err) {
-          console.log(err);
           return reject({
             status: 501,
             message: "Get History Error",

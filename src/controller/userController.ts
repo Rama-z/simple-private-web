@@ -7,8 +7,6 @@ class UserController {
   }
   login = async (req: Request, res: Response): Promise<Response> => {
     try {
-      // console.log(typeof req.body);
-      // console.log(req);
       // const result = await authRepo.login(req.body);
       return res.status(201).json({
         result: "success",
