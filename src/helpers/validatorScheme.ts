@@ -42,6 +42,12 @@ class ValidatorScheme {
         .email("Not a valid email"),
     }),
   });
+
+  public async myMethod(): Promise<string> {
+    return "";
+  }
 }
 
 export default ValidatorScheme;
+
+export const myValidatorScheme = new ValidatorScheme();

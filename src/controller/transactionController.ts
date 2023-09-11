@@ -37,6 +37,18 @@ class TransactionController {
       throw err;
     }
   };
+
+  addHistory = async (req: Request, res: Response): Promise<Response> => {
+    return res.send();
+  };
+
+  removeHistory = async (req: Request, res: Response): Promise<Response> => {
+    return res.send();
+  };
+
+  gotHistory = async (req: Request, res: Response): Promise<Response> => {
+    return res.send();
+  };
 }
 
 export default new TransactionController();

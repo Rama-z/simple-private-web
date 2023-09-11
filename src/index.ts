@@ -1,10 +1,14 @@
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
-import authRoutes from "./routes/authRoutes";
-import userRoutes from "./routes/userRoutes";
+import {
+  authRoutes,
+  productRoutes,
+  taskRoutes,
+  transactionRoutes,
+  userRoutes,
+} from "./routes";
 import compression from "compression";
-import transactionRoutes from "./routes/transactionRoutes";
 import express, { Application } from "express";
 
 require("express-async-errors");
@@ -35,9 +39,17 @@ class App {
   }
 
   protected routes(): void {
+    // Login, Register, Logout, Forget Password, Change Password
     this.app.use(`${this.prefix}/auth`, authRoutes);
+    // Get Profile, Edit Profile
     this.app.use(`${this.prefix}/user`, userRoutes);
+    // Get task, Add task, Edit Task, Delete Task
+    this.app.use(`${this.prefix}/task`, taskRoutes);
+    //
+    this.app.use(`${this.prefix}/product`, productRoutes);
+    //
     this.app.use(`${this.prefix}/transaction`, transactionRoutes);
+    //
     this.app.get(`${this.prefix}/`, (req, res) => {
       res.send(this.text);
     });
