@@ -69,7 +69,7 @@ class AuthRepository {
         }
         bcrypt.compare(
           body.password,
-          passwordResult.rows[0].password,
+          passwordResult?.rows[0]?.password,
           (err, isSame) => {
             if (!isSame) {
               return reject({

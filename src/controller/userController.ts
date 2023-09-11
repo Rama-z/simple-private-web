@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 // import wbm from
 
 class UserController {
-  getAllUser(req: Request, res: Response): Response {
-    return res.send("Get all user Success");
+  async getAllUser(req: Request, res: Response): Promise<Response> {
+    return res.send();
   }
   login = async (req: Request, res: Response): Promise<Response> => {
     try {

@@ -10,6 +10,9 @@ class TransactionRoutes extends MainRoutes {
       "/createTransaction",
       transactionController.createTransaction
     );
+    this.router.post("/add-history", transactionController.addHistory);
+    this.router.delete("/remove-history", transactionController.removeHistory);
+    this.router.get("/get-history", transactionController.gotHistory);
   }
 }
 
